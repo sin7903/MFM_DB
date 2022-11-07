@@ -1,9 +1,6 @@
 FROM --platform=linux/amd64 python:3.9-slim-buster
 
 
-# environment
-# ENV DOCKER_DEFAULT_PLATFORM=linux/amd64
-
 # set work directory as MLOps
 WORKDIR /MLOps
 
