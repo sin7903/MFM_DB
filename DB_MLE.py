@@ -1,3 +1,5 @@
+## Main file to create table and set values 
+
 import psycopg2
 from sklearn import datasets
 import threading 
