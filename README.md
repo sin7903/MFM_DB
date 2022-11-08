@@ -48,9 +48,9 @@ MLOps for MLE의 DB 챕터의 실습내용입니다.
 `python DB_MLE.py`
 
 ## psql을 이용한 확인
-1. 컨테이너 내부에서 서버로 진입
+1. psql로 postgres 서버 진입
 
-`docker exec -it postgres /bin/bash`
+`psql -h localhost -p 5432 -U postgres`
 
 2. 서버에서 테이블 확인
 

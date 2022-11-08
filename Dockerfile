@@ -9,10 +9,11 @@ COPY DB_MLE.py .
 COPY requirements.txt .
 
 # RUN 
-RUN apt-get update -y && apt-get install -y gcc
-RUN pip install --upgrade pip
-RUN pip install --upgrade setuptools wheel
-RUN pip install -r requirements.txt
+RUN apt-get update -y && apt-get install -y gcc &&\
+    pip install --upgrade pip &&\
+    pip install --upgrade setuptools wheel  &&\
+    pip install -r requirements.txt &&\
+    chmod 744 DB_MLE.py
 
 # Create table and Insert data
-# CMD ["nohup DB_MLE.py &"]
+CMD ["python", "DB_MLE.py"]
