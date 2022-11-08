@@ -13,9 +13,8 @@ y = y.astype(float)
 
 
 ## set iris data
-def insert_iris(list_X:list, list_y:list, j:int, i:int):
+def insert_iris(list_X:list, list_y:list, i:int):
     insert_data = (
-        j+1, 
         list_X[i,0],
         list_X[i,1], 
         list_X[i,2], 
@@ -52,28 +51,35 @@ with psycopg2.connect(
 
         ## for INSERT VALUES
         insert_into = '''INSERT INTO iris_data(
-            id, 
             sepal_length_cm, 
             sepal_width_cm, 
             petal_length_cm, 
             petal_width_cm, 
             target
         ) 
-            VALUES(%s, %s, %s, %s, %s, %s)
+            VALUES(%s, %s, %s, %s, %s)
         '''
 
         ## CREATE TABLE
         cur.execute(sql)
         conn.commit()
 
+## connection discrimination for stability
+with psycopg2.connect(
+    dbname='postgres', 
+    user='postgres', 
+    password='#wkdqudtjs1', 
+    host='host.docker.internal', 
+    port=5432
+) as conn:
+
+    with conn.cursor() as cur:
+
         ## INSERT VALUES in every 5 seconds
-        i, j = 0, 0
+        i = 0
         while True:
-            if i < len(y):
-                cur.execute(insert_into, insert_iris(X, y, j, i))
-                conn.commit()
-                time.sleep(5)
-                i += 1
-            elif i >= len(y):
-                i = 0
-            j += 1
+            cur.execute(insert_into, insert_iris(X, y, i))
+            conn.commit()
+            time.sleep(5)
+            i += 1
+            i %= len(y)
