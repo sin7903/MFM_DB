@@ -31,7 +31,7 @@ y = df['target']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 ## set mlflow tracking uri
-mlflow.set_tracking_uri("sqlite:///mlflow.db")
+mlflow.set_tracking_uri("http://127.0.0.1:5000")
 
 ## logging experiment information
 client = MlflowClient()
@@ -63,9 +63,8 @@ with mlflow.start_run():
     SVM.fit(X_train, y_train)
     ACC = SVM.score(X_test, y_test)
 
-    mlflow.log_param("C", C)
-    mlflow.log_param("kernel", kernel)
-    mlflow.log_param("decision_function_shape", decision_function_shape)
+    params = {"C":C, "kernel":kernel, "decision_function_shape":decision_function_shape}
+    mlflow.log_params(params)
     mlflow.log_metric("Accuracy", ACC)
     mlflow.sklearn.log_model(
         sk_model = SVM, 
