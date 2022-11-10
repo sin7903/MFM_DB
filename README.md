@@ -74,6 +74,7 @@ build 단계에서 platform을 설정해 줘야 함
 --default-artifact-root $(pwd)/mlruns`
 
  3. 웹사이트 확인
+ 
 http://127.0.0.1:5000/
 
 
@@ -90,6 +91,7 @@ tracking-server 폴더에 들어있는 requirement.txt 파일 실행
 `python train.py`
 
 3. 웹 사이트 확인
+
 http://127.0.0.1:5000/
 
 
@@ -97,4 +99,4 @@ http://127.0.0.1:5000/
 
 1. python 스크립트 실행
 
-`python [load.py](http://load.py) —run-id run_id`
+`python load.py —run-id run_id`
