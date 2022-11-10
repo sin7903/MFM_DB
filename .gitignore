@@ -1,3 +1,7 @@
+# ignore direnv
+.envrc
+.direnv
+
 # ignore test file
 /test
 
