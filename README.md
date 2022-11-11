@@ -59,3 +59,44 @@ MLOps for MLE의 DB 챕터의 실습내용입니다.
 # 참고사항
 m1 mac book pro에서 `psycopg2.OperationalError: SCRAM authentication requires libpq version 10 or above`에러 발생함.
 build 단계에서 platform을 설정해 줘야 함
+
+# Model Registry
+## (1) MLflow Server 띄우기
+
+1. mlruns 폴더 생성
+
+`mkdir mlruns`
+
+2. mlflow server 띄위기
+
+`mlflow server \  
+--backend-store-uri sqlite:///mlflow.db \
+--default-artifact-root $(pwd)/mlruns`
+
+ 3. 웹사이트 확인
+
+http://127.0.0.1:5000/
+
+
+## (2),(3) 데이터 추출, 모델 학습 및 저장
+
+1. requirement.txt 파일 실행
+
+tracking-server 폴더에 들어있는 requirement.txt 파일 실행
+
+`…/Model/tracking-server/pip install -r requirement.txt`
+
+2. pytnon 스크립트 실행
+
+`python train.py`
+
+3. 웹 사이트 확인
+
+http://127.0.0.1:5000/
+
+
+## (4) Download Model from MLFlow
+
+1. python 스크립트 실행
+
+`python load.py —-run-id {run_id}`

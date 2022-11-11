@@ -1,5 +1,13 @@
+# ignore direnv
+.envrc
+.direnv
+
 # ignore test file
 /test
 
 # ignore cache
 /__pycache__
+
+# ignore model results
+/Model/tracking-server/mlruns
+/Model/tracking-server/artifact_downloads
